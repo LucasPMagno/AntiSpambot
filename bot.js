@@ -15,7 +15,8 @@ bot.on('message', message => {
         console.log('1');
         bot.guilds.find('id', config.guildID).members.find('id', message.author.id).addRole(config.roleID);
     } else if (message.content.includes('no') && !message.author.roles) {
-        bot.guilds.find('id', config.guildID).members.find('id', message.author.id).kick()
+        bot.guilds.find('id', config.guildID).members.find('id', message.author.id).kick();
+        member.send('You have been kicked because you did not agree to the rules!');
     }
 });
 bot.login(config.token);
