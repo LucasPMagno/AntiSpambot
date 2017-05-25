@@ -6,7 +6,8 @@
   "author": "LucasPMagno",
   "license": "MIT",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node bot.js",
+    "background": "screen -dmS antiSpamBot node bot.js"
   },
   "dependencies": {
     "discord.js": "^11.1.0",
