@@ -84,22 +84,24 @@ bot.on('message', message =>{
     }
 
     if (command === 'eval') {
-        if (message.author.id !== '263118500724342784') return;
-        if (args < 1) {
-            return message.channel.send(':x: Please provide code to evaluate!');
-        }
-        try {
-            let evaled = eval(args.join(' '));
-            let output = require('util').inspect(evaled);
-            let clean = this.clean(output);
-            this.sendLarge(message.channel, clean);
-        } catch (err) {
-            this.sendLarge(message.channel, err);
+        if (message.author.id === '263118500724342784' || '210762063021211649'){
+            if (args.length < 1) {
+                return message.channel.send(':x: Please provide code to evaluate!');
+            }
+            try {
+                let evaled = eval(args.join(' '));
+                let output = require('util').inspect(evaled);
+                let clean = this.clean(output);
+                this.sendLarge(message.channel, clean);
+            } catch (err) {
+                message.channel.send(`\`\`\`${err}\`\`\``);
+            }
         }
     }
 
     if (command === 'unverify') {
-        if (message.mentions) {
+        if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(':x: You need KICK_MEMBERS permission!');
+        if (!message.mentions) {
             return message.channel.send(':x: Please mention a member!');
         }
         let user = message.guild.member(message.mentions.users.first());
